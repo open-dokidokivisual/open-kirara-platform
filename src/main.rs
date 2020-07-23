@@ -1,13 +1,28 @@
-use warp::http::status::StatusCode;
+/* coding: utf-8 */
+/**
+ * open-kirara-platform
+ *
+ * Copyright 2020-, Kaede Fujisaki
+ */
+
 use warp::Filter;
-use warp::reply::{Reply, Response};
-use warp::reject::Rejection;
+use warp::reply::{Reply};
+use warp::reject::{Rejection};
 use warp::http::uri;
-use std::collections::HashMap;
 use std::str::FromStr;
 
+mod web;
+use web::template::{*};
+
+async fn render<T: yarte::Template>(renderer: T) -> Result<impl Reply, Rejection> {
+  match renderer.call() {
+    Ok(body) => Ok(warp::reply::html(body)),
+    Err(err) => Err(warp::reject::custom::<TemplateError>(err.into())),
+  }
+}
+
 async fn index() -> Result<impl Reply, Rejection> {
-  Ok(warp::reply::html("hey"))
+  render(Index{}).await
 }
 
 async fn not_found() -> Result<impl Reply, Rejection> {
