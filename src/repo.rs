@@ -5,5 +5,8 @@
  * Copyright 2020-, Kaede Fujisaki
  *****************************************************************************/
 
+use sqlx::prelude::*;
 
-pub mod template;
+pub async fn open() -> sqlx::Result<impl Connection> {
+  sqlx::sqlite::SqliteConnection::connect("sqlite:").await
+}

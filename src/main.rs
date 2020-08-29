@@ -1,18 +1,19 @@
 /* coding: utf-8 */
-/**
+/******************************************************************************
  * open-kirara-platform
  *
  * Copyright 2020-, Kaede Fujisaki
- */
+ *****************************************************************************/
 
 use warp::Filter;
-use warp::reply::{Reply};
-use warp::reject::{Rejection};
+use warp::reply::Reply;
+use warp::reject::Rejection;
 use warp::http::uri;
 use std::str::FromStr;
 
 mod web;
 use web::template::{*};
+mod repo;
 
 async fn render<T: yarte::Template>(renderer: T) -> Result<impl Reply, Rejection> {
   match renderer.call() {
@@ -37,18 +38,13 @@ fn main() {
     .build()
     .unwrap();
 
+  let router = warp::path::end().and_then(index)
+    .or(warp::any().and_then(not_found));
+
   rt.block_on(async {
-    let router = {
-      let index =
-        warp::path::end()
-          //.and(warp::query::<HashMap<String, String>>())
-          .and_then(index);
-      index
-        .or(warp::any().and_then(not_found))
-    };
+    repo::open().await.unwrap();
     warp::serve(router)
       .run(([127, 0, 0, 1], 3030))
       .await;
   });
-
 }
