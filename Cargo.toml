@@ -12,3 +12,4 @@ warp = "0.2.3"
 yarte = "0.12.1"
 chrono = "0.4.13"
 sqlx = { version = "0.3.5", default-features = false, features = ["runtime-tokio", "macros", "sqlite", "chrono", "postgres"] }
+num_cpus = "1.0"

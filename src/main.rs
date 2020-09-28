@@ -32,7 +32,7 @@ async fn not_found() -> Result<impl Reply, Rejection> {
 
 fn main() {
   let mut rt = tokio::runtime::Builder::new()
-    .core_threads(32)
+    .core_threads(num_cpus::get() + 1)
     .threaded_scheduler()
     .enable_all()
     .build()
