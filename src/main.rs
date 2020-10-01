@@ -24,10 +24,6 @@ async fn render<T: yarte::Template>(renderer: T) -> Result<impl Reply, Rejection
   }
 }
 
-async fn index() -> Result<impl Reply, Rejection> {
-  render(Index{}).await
-}
-
 async fn not_found() -> Result<impl Reply, Rejection> {
   Ok(warp::redirect(uri::Uri::from_str("/").unwrap()))
 }
@@ -41,8 +37,10 @@ fn main() {
     .unwrap();
 
   let router =
-    warp::path::end().and_then(index)
-    .or(warp::any().and_then(not_found));
+    warp::path::end().and(warp::fs::file("fe/static/index.html"))
+      .or(warp::path("dist").and(warp::fs::dir("fe/dist")))
+      .or(warp::path("static").and(warp::fs::dir("fe/static")))
+      .or(warp::any().and_then(not_found));
 
   rt.block_on(async {
     repo::open().await.unwrap();

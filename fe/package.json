@@ -4,11 +4,10 @@
   "description": "Open Kirara Platform",
   "main": "main.js",
   "scripts": {
-    "build": "webpack",
+    "build": "npm run build-production",
     "watch": "webpack --watch --config webpack.development.ts",
     "build-production": "webpack --config webpack.production.ts",
     "build-development": "webpack --config webpack.development.ts",
-    "create-package": "npm run build-production && zip -r \"kagimori-$(git describe --tags).zip\" dist icons static manifest.json LICENSE README.md",
     "up": "npm-check-updates --upgrade && npm install && npm audit fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,7 +23,8 @@
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-merge": "^5.1.4"
   },
   "dependencies": {
     "vue": "^2.6.12",
