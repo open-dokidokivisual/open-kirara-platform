@@ -2,8 +2,10 @@ import path from 'path'
 import { Configuration } from 'webpack'
 
 const config: Configuration = {
-  mode: "development",
-  entry: "./src/main.ts",
+  mode: 'development',
+  entry: {
+    main: './src/main.ts'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js'
@@ -20,7 +22,7 @@ const config: Configuration = {
   resolve: {
     extensions: ['.ts', '.js'],
     alias: {
-      vue: "vue/dist/vue.js"
+      vue: 'vue/dist/vue.js'
     }
   }
 };
