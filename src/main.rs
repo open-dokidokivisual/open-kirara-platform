@@ -16,6 +16,8 @@ use web::template::{*};
 mod repo;
 
 async fn render<T: yarte::Template>(renderer: T) -> Result<impl Reply, Rejection> {
+  //let (mut sender, body) = warp::hyper::body::Body::channel();
+  //warp::reply::Response::new(body);
   match renderer.call() {
     Ok(body) => Ok(warp::reply::html(body)),
     Err(err) => Err(warp::reject::custom::<TemplateError>(err.into())),
@@ -38,7 +40,8 @@ fn main() {
     .build()
     .unwrap();
 
-  let router = warp::path::end().and_then(index)
+  let router =
+    warp::path::end().and_then(index)
     .or(warp::any().and_then(not_found));
 
   rt.block_on(async {
