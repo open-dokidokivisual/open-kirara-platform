@@ -1421,8 +1421,11 @@ name = "open-kirara-platform"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "lazy_static",
  "num_cpus",
+ "serde",
  "sqlx",
+ "string-error",
  "tokio",
  "warp",
  "yarte",
@@ -2174,6 +2177,12 @@ name = "std_prelude"
 version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8207e78455ffdf55661170876f88daf85356e4edd54e0a3dbc79586ca1e50cbe"
+
+[[package]]
+name = "string-error"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "439558b73299d7afdf52c36399c3c812cca10fe5ca08429f38815df5bacf3ef7"
 
 [[package]]
 name = "strsim"
