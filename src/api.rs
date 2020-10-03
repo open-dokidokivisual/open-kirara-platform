@@ -11,7 +11,7 @@ use warp::reply::Json;
 use crate::repo;
 
 async fn titles() -> Result<Json, Rejection> {
-  let repo = repo::open().await;
+  let repo = repo::get();
   let reply = repo.read_titles().await.unwrap();
   Ok(warp::reply::json(&reply))
 }

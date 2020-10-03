@@ -34,7 +34,7 @@ async fn not_found() -> Result<impl Reply, Rejection> {
 }
 
 async fn init_repo() -> sqlx::Result<Arc<repo::Repo>> {
-  let repo = repo::open_with("sqlite:").await?;
+  let repo = repo::open("sqlite:").await?;
   repo.init().await?;
   Ok(repo)
 }
