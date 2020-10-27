@@ -1,4 +1,4 @@
-package com.open_dokidokivisual.open_kirara_platform
+package com.open_dokidokivisual.platform
 
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Promise
