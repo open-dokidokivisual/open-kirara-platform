@@ -1,4 +1,4 @@
-package com.open_dokidokivisual.platform
+package org.dokidokivisual.platform
 
 import io.vertx.core.Vertx
 import io.vertx.junit5.VertxExtension

@@ -20,7 +20,7 @@ val kotlinVersion = "1.4.10"
 val vertxVersion = "4.0.0.Beta3"
 val junitJupiterVersion = "5.6.2"
 
-val mainVerticleName = "com.open_dokidokivisual.platform.MainVerticle"
+val mainVerticleName = "org.dokidokivisual.platform.MainVerticle"
 val watchForChange = "src/**/*"
 val doOnChange = "./gradlew classes"
 val launcherClassName = "io.vertx.core.Launcher"
