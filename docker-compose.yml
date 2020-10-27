@@ -1,0 +1,30 @@
+---
+version: '3.7'
+services:
+  mysql:
+    ports:
+      - '3306:3306'
+    image: 'mysql:latest'
+    restart: always
+    environment:
+      - 'MYSQL_DATABASE=okp'
+      - 'MYSQL_ROOT_PASSWORD=root'
+      - 'MYSQL_USER=aoba'
+      - 'MYSQL_PASSWORD=zoi'
+      - 'TZ=Asia/Tokyo'
+    networks:
+      - 'kirara-link'
+    volumes:
+      - './docker/conf/mysql/conf.d:/etc/mysql/conf.d:ro'
+      - './docker/conf/mysql/init-db:/docker-entrypoint-initdb.d:ro'
+      - './docker/data/mysql:/var/lib/mysql'
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '4'
+        max-size: '250m'
+
+## Networks
+networks:
+  kirara-link:
+    external: false
