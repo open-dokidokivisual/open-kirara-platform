@@ -2,6 +2,7 @@
 version: '3.7'
 services:
   mysql:
+    container_name: 'okp_mysql'
     ports:
       - '3306:3306'
     image: 'mysql:latest'
